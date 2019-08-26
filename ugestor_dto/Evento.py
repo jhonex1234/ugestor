@@ -1,9 +1,10 @@
 class Evento:
-	def __init__(self, id, nombre, fechaInicio, fechaFin):
+	def __init__(self, id, nombre, fechaInicio, fechaFin, idDiseñador):
 		self.__id = id
 		self.__nombre = nombre
 		self.__fechaInicio = fechaInicio
 		self.__fechaFin = fechaFin
+		self._idDiseñador = idDiseñador
 
 
 	def getId(self):
@@ -30,4 +31,8 @@ class Evento:
 	def setFechaFin(self, fechaFin):
 		self.__fechaFin = fechaFin	
 
-		
+	def setIdDiseñador(self, idDiseñador):
+		self._idDiseñador = idDiseñador
+
+	def getIdDiseñador(self):
+		return self._idDiseñador

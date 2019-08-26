@@ -15,8 +15,8 @@ class EventoDAO:
 
 
 	def Create(self, Evento):
-		self.sql = """insert into {0}.evento (id, nombre, fechainicio, fechafin) values ({1}, '{2}','{3}','{4}')
-		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin())
+		self.sql = """insert into {0}.evento (id, nombre, fechainicio, fechafin, iddisenador) values ({1}, '{2}','{3}','{4}', {5})
+		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin(), Evento.getIdDiseñador())
 		try: 
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
@@ -50,8 +50,8 @@ class EventoDAO:
 
 
 	def Update(self, Evento):
-		self.sql = """update {0}.evento set id={1}, nombre='{2}', fechainicio='{3}', fechafin='{4}' where id={1}
-		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin())
+		self.sql = """update {0}.evento set id={1}, nombre='{2}', fechainicio='{3}', fechafin='{4}', iddisenador={5} where id={1}
+		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin(), Evento.getIdDiseñador())
 		try: 
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
