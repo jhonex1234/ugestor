@@ -2,18 +2,26 @@
 
 class Persona:
 	"""docstring for ClassName"""
-	def __init__(self, cedula, nombre, apellido, fechaNacimiento, sexo):
-		self.__cedula = cedula
+	def __init__(self, id, documento, nombre, apellido, paisOrigen, fechaNacimiento, sexo):
+		self.__id = id
+		self.__documento = documento
 		self.__nombre = nombre 
 		self.__apellido = apellido
+		self.__paisOrigen = paisOrigen
 		self.__fechaNacimiento = fechaNacimiento
 		self.__sexo = sexo
 
-	def  getCedula(self):
-		return self.__cedula
+	def getId(self):
+		return self.__id
 
-	def setCedula(self, cedula):
-		self.__cedula = cedula
+	def setId(self, id):
+		self.__id = id
+
+	def getDocumento(self):
+		return self.__documento
+
+	def setDocumento(self, documento):
+		self.__documento = documento
 
 	def setNombre(self, nombre):
 		self.__nombre = nombre
@@ -26,6 +34,12 @@ class Persona:
 	
 	def getApellido(self):
 		return self.__apellido	
+
+	def getPaisOrigen(self):
+		return self.__paisOrigen
+
+	def setPaisOrigen(self, paisOrigen):
+		self.__paisOrigen = paisOrigen
 
 	def setFechaNacimiento(self, fechaNacimiento):
 		self.__fechaNacimiento = fechaNacimiento
