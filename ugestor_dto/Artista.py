@@ -7,7 +7,7 @@ class Artista(Empleado):
         self.__id = id
         self.__nombreArtistico = nombreArtistico
         self.__generoMusical = generoMusical
-        self.__tipoArtist a= tipoArtista
+        self.__tipoArtist = tipoArtista
 
     def getnombreArtistico(self):
         return self.__id
