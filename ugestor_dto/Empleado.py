@@ -9,5 +9,3 @@ class Empleado(Persona):
 		self.__Cargo = Cargo
 		self.__Salario = Salario
 		self.__id = id
-
-		
