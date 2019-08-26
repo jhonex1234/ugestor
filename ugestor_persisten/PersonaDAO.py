@@ -1,10 +1,9 @@
 import os
 import sys
 script_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append("{0}/ugestor_dto".format(script_dir))
-#sys.path.append("{0}/com_projectFlores_resource".format(script_dir))
+pathRootFolder = script_dir.split(script_dir.split(os.sep)[-1])[0]
+sys.path.append("{0}/ugestor_dto".format(pathRootFolder))
 from DAO import DAO
-
 from Persona import Persona
 
 
