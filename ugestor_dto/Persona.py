@@ -2,10 +2,11 @@
 
 class Persona:
 	"""docstring for ClassName"""
-	def __init__(self, id, documento, nombre, apellido, paisOrigen, fechaNacimiento, sexo):
+	def __init__(self, id, documento, nombre, tipoDocumento, apellido, paisOrigen, fechaNacimiento, sexo):
 		self.__id = id
 		self.__documento = documento
-		self.__nombre = nombre 
+		self.__nombre = nombre
+		self.__tipoDocumento =  tipoDocumento
 		self.__apellido = apellido
 		self.__paisOrigen = paisOrigen
 		self.__fechaNacimiento = fechaNacimiento
@@ -28,6 +29,12 @@ class Persona:
 	
 	def getNombre(self):
 		return self.__nombre
+
+	def gettipoDocumento(self):
+		return self.__tipoDocumento
+
+	def settipoDocumento(self, tipoDocumento):
+		self.__tipoDocumento = tipoDocumento
 
 	def setApellido(self, apellido):
 		self.__apellido = apellido
