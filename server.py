@@ -8,5 +8,10 @@ def index():
 	lista = ["Hola Mundo","Hola Mundo","Hola Mundo"]
 	return render_template("index.html",val="HolaMudo", lista=lista)
 
+@app.route('/', methods=['GET'])
+def info():
+	return render_template("info.html")
+
+
 if __name__ == '__main__':
     app.run(port=8000, debug=True, threaded=True) #, host='0.0.0.0'

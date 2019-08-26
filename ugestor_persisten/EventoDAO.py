@@ -4,19 +4,54 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 pathRootFolder = script_dir.split(script_dir.split(os.sep)[-1])[0]
 sys.path.append("{0}/ugestor_dto".format(pathRootFolder))
 from DAO import DAO
-from Persona import Persona
+from Evento import Evento
 
 
-class PersonaDAO:
+class EventoDAO:
 	"""docstring for ClassName"""
 	def __init__(self):
 		self.conn = DAO()
 		self.sql = ""
 
 
-	def Create(self, Persona):
-		self.sql = """insert into {0}.persona (id ,cedula, nombre, apellido, fechanacimiento, sexo) values ({6},{1}, '{2}','{3}','{4}','{5}')
-		""".format(self.conn.getSCHEMA(), Persona.getCedula(), Persona.getNombre(), Persona.getApellido(), Persona.getFechaNacimiento(), Persona.getSexo(), Persona.getId())
+	def Create(self, Evento):
+		self.sql = """insert into {0}.evento (id, nombre, fechainicio, fechafin) values ({1}, '{2}','{3}','{4}')
+		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin())
+		try: 
+			cn = self.conn.getConnection()
+			cur = cn.cursor()
+			cur.execute(self.sql, )
+			cur.close()
+			cn.commit()
+			self.msj = "Finca Creada Exitosamente"
+		except (Exception, psycopg2.DatabaseError) as error: 
+			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
+		finally: 
+			if cn is not None: 
+				cn.close()
+		return self.msj	
+
+
+	def Delete(self, Evento):
+		self.sql = """delete from {0}.evento where id={1}""".format(self.conn.getSCHEMA(), Evento.getId())
+		try: 
+			cn = self.conn.getConnection()
+			cur = cn.cursor()
+			cur.execute(self.sql, )
+			cur.close()
+			cn.commit()
+			self.msj = "Finca Creada Exitosamente"
+		except (Exception, psycopg2.DatabaseError) as error: 
+			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
+		finally: 
+			if cn is not None: 
+				cn.close()
+		return self.msj	
+
+
+	def Update(self, Evento):
+		self.sql = """update {0}.evento set id={1}, nombre='{2}', fechainicio='{3}', fechafin='{4}' where id={1}
+		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin())
 		try: 
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
@@ -31,43 +66,8 @@ class PersonaDAO:
 				cn.close()
 		return self.msj	
 
-
-	def Delete(self, Persona):
-		self.sql = """delete from {0}.persona where id={1}""".format(self.conn.getSCHEMA(), Persona.getId())
-		try: 
-			cn = self.conn.getConnection()
-			cur = cn.cursor()
-			cur.execute(self.sql, )
-			cur.close()
-			cn.commit()
-			self.msj = "Finca  Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
-			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
-				cn.close()
-		return self.msj	
-
-
-	def Update(self, Persona):
-		self.sql = """update table {0}.persona set cedula={1}, nombre='{2}', apellido='{3}', fechanacimiento='{4}', sexo='{5}' where id={6}
-		""".format(self.conn.getSCHEMA(), Persona.getCedula(), Persona.getNombre(), Persona.getApellido(), Persona.getFechaNacimiento(), Persona.getSexo(), Persona.getId())
-		try: 
-			cn = self.conn.getConnection()
-			cur = cn.cursor()
-			cur.execute(self.sql, )
-			cur.close()
-			cn.commit()
-			self.msj = "Finca  Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
-			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
-				cn.close()
-		return self.msj	
-
-	def Buscar(self, Persona, column):
-		self.sql = """select * from {0}.persona where {1}={2}""".format(self.conn.getSCHEMA(), column, Persona)
+	def Buscar(self, Evento, column):
+		self.sql = """select * from{0}.evento where {1}={2}""".format(self.conn.getSCHEMA(), column, Evento)
 		try: 
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
