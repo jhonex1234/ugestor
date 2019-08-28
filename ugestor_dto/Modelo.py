@@ -20,13 +20,6 @@ class Modelo:
 	def setIdid(self, id):
 		self.__id = id
 
-
-	def getId(self):
-		return self.__id
-
-	def setId(self, id):
-		self.__id = id
-
 	def getcolorOjos(self):
 		return self.__colorOjos
 
@@ -57,8 +50,8 @@ class Modelo:
 	def setmedidaCintura(self, medidaCintura):
 		self.__medidaCintura = medidaCintura
 
-	def getmedidaCintura(self):
+	def getPeso(self):
 		return self.__medidaCintura
 
-	def setpeso(self, peso):
+	def setPeso(self, peso):
 		self.__peso = peso
