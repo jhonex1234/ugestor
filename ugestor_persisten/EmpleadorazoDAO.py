@@ -16,7 +16,7 @@ class EmpleadorazoDAO:
         self.sql = ""
 
     def Create(self, Empleadorazo):
-        self.sql = """insert into {0}.Empleadorazo (id) values ({1})""".format(
+        self.sql = """insert into {0}.Empleadorazo (idEmpleadorazo) values ({1})""".format(
             self.conn.getSCHEMA(), Empleadorazo.getId())
         try:
             cn = self.conn.getConnection()
