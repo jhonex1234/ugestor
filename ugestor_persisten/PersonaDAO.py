@@ -15,11 +15,24 @@ class PersonaDAO:
 		self.conn = DAO()
 		self.sql = ""
 
+	def validate(self, Persona):
+		print(self.conn.validateSequence(Persona))
+
+
+
 
 	def Create(self, Persona):
-		self.sql = """insert into {0}.persona (id ,cedula, nombre, apellido, fechanacimiento, sexo,tipoDocumento) values ({6},{1}, '{2}','{3}','{4}','{5}','{7}')
+		nameSecuen = ""
+		if(self.conn.validateSequence(Persona.__class__.__name__)):
+			self.conn.reconnect()
+			nameSecuen = self.conn.createSequence(Persona.__class__.__name__) 
+		else:
+			nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
+		self.conn.reconnect()
+		self.sql = """insert into {0}.persona (id ,cedula, nombre, apellido, fechanacimiento, sexo,tipoDocumento) values (nextval('{0}.{6}'),{1}, '{2}','{3}','{4}','{5}','{7}')
 		""".format(self.conn.getSCHEMA(), Persona.getDocumento(), Persona.getNombre(), Persona.getApellido(), Persona.getFechaNacimiento(), Persona.getSexo(),
-			Persona.getId(), Persona.gettipoDocumento())
+			nameSecuen, Persona.gettipoDocumento())
+		
 		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
@@ -85,8 +98,9 @@ class PersonaDAO:
 		return result
 
 
-	def Buscar(self, Persona, column):
-		self.sql = """select * from {0}.persona where {1}={2}""".format(self.conn.getSCHEMA(), column, Persona)
+	def VerTodos(self):
+		self.sql = """select * from {0}.persona""".format(self.conn.getSCHEMA())
+		result = []
 		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()

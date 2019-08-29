@@ -15,14 +15,50 @@ pass_url = '/'
 @app.route('/cPersona', methods=['GET', 'POST'])
 def indexcPersona():
 	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
-	dataManager.createPerson(persona)
+	
+	return dataManager.createPerson(persona)#redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+
+
+@app.route('/dPersona', methods=['GET', 'POST'])
+def indexdPersona():
+	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	dataManager.deletePerson(persona)
 	return redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+
+
+@app.route('/uPersona', methods=['GET', 'POST'])
+def indexuPersona():
+	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	dataManager.updatePerson(persona)
+	return redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+
+
+@app.route('/fPersona', methods=['GET', 'POST'])
+def indexfPersona():
+	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	dataManager.buscarPerson(persona)
+	return redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+
+
+@app.route('/alPersona', methods=['GET', 'POST'])
+def indexalPersona():
+	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	dataManager.obtenerPersonas()
+	return redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+
 
 
 @app.route('/formPersona', methods=['GET'])
 def info():
-	return render_template("info.html")
+	return "Ejemplo de retorno apartir de la peticion </br>{0}".format(dataManager.obtenerPersonas())#render_template("info.html")
 
+
+
+@app.route('/form_Persona', methods=['GET'])
+def info_1():
+	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	dataManager.v(persona.__class__.__name__)
+	return	""
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True, threaded=True)

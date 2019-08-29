@@ -33,6 +33,10 @@ class DAO:
 	def getConnection(self):
 		return self.conn
 
+	def reconnect(self):
+		self.connnection()
+
+
 
 	def connnection(self): 
 		try: 
@@ -44,4 +48,43 @@ class DAO:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
 			return self.conn
 
-	
+	def createSequence(self,name):
+		self.sql = """create sequence {0}.seq_{1} INCREMENT 1
+				  MINVALUE 1
+				  MAXVALUE 9223372036854775807
+				  START 1
+				  CACHE 1; """.format(self.SCHEMA, name)
+		try:
+			cn = self.conn
+			cur = cn.cursor()
+			cur.execute(self.sql, )
+			cur.close()
+			cn.commit()
+			return """{0}.{1};""".format(self.SCHEMA, name)
+		except (Exception, psycopg2.DatabaseError) as error:
+			print("Lamentamos informar:  {0}".format(error))
+			return None
+		finally:
+			if cn is not None:
+				cn.close()
+
+	def validateSequence(self,name):
+		self.sql = """SELECT *FROM information_schema.sequences where sequence_name = '{0}.seq_{1}'""".format(self.SCHEMA,name)
+		retsul = []
+		boll = True
+		try:
+			cn = self.conn
+			cur = cn.cursor()
+			cur.execute(self.sql, )
+			result = cur.fetchall()
+			cur.close()
+		except (Exception, psycopg2.DatabaseError) as error:
+			print("Lamentamos informar le que a ocurrido un error:  {0}".format(error))
+			return None
+		finally:
+			if cn is not None:
+				cn.close()
+		
+		if(result != ()):
+			boll = False
+		return boll	

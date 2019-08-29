@@ -11,7 +11,7 @@ class Persona:
 		self.__paisOrigen = paisOrigen
 		self.__fechaNacimiento = fechaNacimiento
 		self.__sexo = sexo
-
+		
 	def getId(self):
 		return self.__id
 

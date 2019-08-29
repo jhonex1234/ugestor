@@ -24,4 +24,7 @@ class DataManager:
 		return personadao.Buscar(Persona, column)
 	
 	def obtenerPersonas(self):
-		return personadao.VerTodos()		
+		return personadao.VerTodos()
+
+	def v(self,Persona):
+		personadao.validate(Persona)		
