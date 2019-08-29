@@ -18,6 +18,7 @@ class ModeloDAO:
     def Create(self, Modelo):
         self.sql = """insert into {0}.Modelo (idModelo,colorojosModelo,colorpieModelo,estaturaModelo ,cinturaModelo,bustoModelo,tallapiesModelo,pesoModelo,fechaHistoricoModelo) values ({6},{1}, '{2}','{3}','{4}','{5}','{7}','{8}','{9}')""".format(
             self.conn.getSCHEMA(), Modelo.getcolorOjos(), Modelo.getcolorPiel(), Modelo.getApellido(), Modelo.getestatura(), Modelo.getmedidaBusto(), Modelo.getId(), Modelo.getmedidaCintura(), Modelo.getPeso())
+            self.conn.reconnect()
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()
@@ -34,6 +35,7 @@ class ModeloDAO:
 
 
 def Delete(self, Mo):
+    self.conn.reconnect()
     self.sql = """delete from {0}.Modelo where idModelo={1}""".format(
         self.conn.getSCHEMA(), Modelo.getId())
     try:
@@ -52,6 +54,7 @@ def Delete(self, Mo):
 
 
 def Update(self, Modelo):
+    self.conn.reconnect()
     self.sql = """update table {0}.Modelo set idModelo={1},colorojosModelo={2},colorpielModelo={3},estaturaModelo={4} ,cinturaModelo={5},bustoModelo={6},tallapiesModelo={8},pesoModelo={9},fechaHistoricoModelo={1}
     """.format(self.conn.getSCHEMA(), Modelo.getId(), Modelo.getNombre(), Modelo.getcolorOjos(), Modelo.getcolorPiel(), Modelo.getestatura(), Modelo.getmedidaBusto(), Modelo.getmedidaBusto(), Modelo.getmedidaCintura(), Modelo.getPeso())
     try:
@@ -69,6 +72,7 @@ def Update(self, Modelo):
     return self.msj
 
     def Buscar(self, Modelo, column):
+        self.conn.reconnect()
         self.sql = """select * from {0}.Modelo where {1}={2}""".format(
             self.conn.getSCHEMA(), column, Modelo)
         try:

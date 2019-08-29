@@ -18,6 +18,7 @@ class EmpleadorazoDAO:
     def Create(self, Empleadorazo):
         self.sql = """insert into {0}.Empleadorazo (idEmpleadorazo) values ({1})""".format(
             self.conn.getSCHEMA(), Empleadorazo.getId())
+            self.conn.reconnect()
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()
@@ -36,6 +37,7 @@ class EmpleadorazoDAO:
 def Delete(self, Mo):
     self.sql = """delete from {0}.Empleadorazo where idEmpleadorazo={1}""".format(
         self.conn.getSCHEMA(), Empleadorazo.getId())
+        self.conn.reconnect()
     try:
         cn = self.conn.getConnection()
         cur = cn.cursor()
@@ -56,12 +58,14 @@ def Delete(self, Mo):
     def Buscar(self, Empleadorazo, column):
         self.sql = """select * from {0}.Empleadorazo where {1}={2}""".format(
             self.conn.getSCHEMA(), column, Empleadorazo)
+            self.conn.reconnect()
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()
             cur.execute(self.sql, )
             result = cur.fetchall()
             cur.close()
+
         except (Exception, psycopg2.DatabaseError) as error:
             self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
         finally:

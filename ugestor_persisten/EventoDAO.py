@@ -15,69 +15,73 @@ class EventoDAO:
 
 
 	def Create(self, Evento):
+		self.conn.reconnect()
 		self.sql = """insert into {0}.evento (id, nombre, fechainicio, fechafin, iddisenador) values ({1}, '{2}','{3}','{4}', {5})
 		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin(), Evento.getIdDiseñador())
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			cur.close()
 			cn.commit()
 			self.msj = "Finca Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 				cn.close()
-		return self.msj	
+		return self.msj
 
 
 	def Delete(self, Evento):
 		self.sql = """delete from {0}.evento where id={1}""".format(self.conn.getSCHEMA(), Evento.getId())
-		try: 
+		self.conn.reconnect()
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			cur.close()
 			cn.commit()
 			self.msj = "Finca Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 				cn.close()
-		return self.msj	
+		return self.msj
 
 
 	def Update(self, Evento):
+		self.conn.reconnect()
 		self.sql = """update {0}.evento set id={1}, nombre='{2}', fechainicio='{3}', fechafin='{4}', iddisenador={5} where id={1}
 		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin(), Evento.getIdDiseñador())
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			cur.close()
 			cn.commit()
 			self.msj = "Finca  Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 				cn.close()
-		return self.msj	
+		return self.msj
 
 	def Buscar(self, Evento, column):
+		self.conn.reconnect()
 		self.sql = """select * from{0}.evento where {1}={2}""".format(self.conn.getSCHEMA(), column, Evento)
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			result = cur.fetchall()
 			cur.close()
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 			    cn.close()
 		return result
 		

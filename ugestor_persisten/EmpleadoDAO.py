@@ -18,6 +18,7 @@ class EmpleadoDAO:
     def Create(self, Empleado):
         self.sql = """insert into {0}.Empleado (idEmpleado,fechaIngresoEmpleado, cargoEmpleado, salarioEmpleado) values ({1},{2}, '{3}','{4}')""".format(
             self.conn.getSCHEMA(),Empleado.getId(),Empleado.getnombrefechaIngreso(),Empleado.getcargo(),Empleado.getsalario())
+            self.conn.reconnect()
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()
@@ -34,6 +35,7 @@ class EmpleadoDAO:
 
 
 def Delete(self, Mo):
+    self.conn.reconnect()
     self.sql = """delete from {0}.Empleado where idEmpleado={1}""".format(
         self.conn.getSCHEMA(), Empleado.getId())
     try:
@@ -52,6 +54,7 @@ def Delete(self, Mo):
 
 
 def Update(self, Empleado):
+    self.conn.reconnect()
     self.sql = """update table {0}.Empleado set idEmpleado={1},fechaIngresoEmpleado={2}, cargoEmpleado={3}, salarioEmpleado={4}
     """.format(self.conn.getSCHEMA(), Empleado.getId(),Empleado.getnombrefechaIngreso(),Empleado.getcargo(),Empleado.getsalario())
     try:
@@ -69,6 +72,7 @@ def Update(self, Empleado):
     return self.msj
 
     def Buscar(self, Empleado, column):
+        self.conn.reconnect()
         self.sql = """select * from {0}.Empleado where {1}={2}""".format(
             self.conn.getSCHEMA(), column, Empleado)
         try:

@@ -17,6 +17,7 @@ class ArtistaDAO:
 
     def Create(self, Artista):
         self.sql = """insert into {0}.Artista (idArtista , nombreArtistico, generoMusical, tipoArtista,  idperdsona) values ({1},{2}, '{3}','{4}')""".format(
+        self.conn.reconnect()
             self.conn.getSCHEMA(), getnombreArtistico(),getnombreArtistico(),getgeneroMusical(),gettipoArtista())
         try:
             cn = self.conn.getConnection()
@@ -35,6 +36,7 @@ class ArtistaDAO:
 
 def Delete(self, Mo):
     self.sql = """delete from {0}.Artista where idArtista={1}""".format(
+    self.conn.reconnect()
         self.conn.getSCHEMA(), Artista.getId())
     try:
         cn = self.conn.getConnection()
@@ -52,6 +54,7 @@ def Delete(self, Mo):
 
 
 def Update(self, Artista):
+    self.conn.reconnect()
     self.sql = """update table {0}.Artista set idArtista={1},nombreArtistico={2}, generoMusical={3},tipoArtista ={4}
     """.format(self.conn.getSCHEMA(), Disenador.getid(),Disenador.getpasaporte(),Disenador.getpasaporte()
     try:
@@ -69,6 +72,7 @@ def Update(self, Artista):
     return self.msj
 
     def Buscar(self, Artista, column):
+        self.conn.reconnect()
         self.sql = """select * from {0}.Artista where {1}={2}""".format(
             self.conn.getSCHEMA(), column, Artista)
         try:

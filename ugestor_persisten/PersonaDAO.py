@@ -25,14 +25,14 @@ class PersonaDAO:
 		nameSecuen = ""
 		if(self.conn.validateSequence(Persona.__class__.__name__)):
 			self.conn.reconnect()
-			nameSecuen = self.conn.createSequence(Persona.__class__.__name__) 
+			nameSecuen = self.conn.createSequence(Persona.__class__.__name__)
 		else:
 			nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
 		self.conn.reconnect()
 		self.sql = """insert into {0}.persona (id ,cedula, nombre, apellido, fechanacimiento, sexo,tipoDocumento) values (nextval('{0}.{6}'),{1}, '{2}','{3}','{4}','{5}','{7}')
 		""".format(self.conn.getSCHEMA(), Persona.getDocumento(), Persona.getNombre(), Persona.getApellido(), Persona.getFechaNacimiento(), Persona.getSexo(),
 			nameSecuen, Persona.gettipoDocumento())
-		
+
 		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
@@ -49,6 +49,7 @@ class PersonaDAO:
 
 
 	def Delete(self, Persona):
+		self.conn.reconnect()
 		self.sql = """delete from {0}.persona where id={1}""".format(self.conn.getSCHEMA(), Persona.getId())
 		try:
 			cn = self.conn.getConnection()
@@ -66,6 +67,7 @@ class PersonaDAO:
 
 
 	def Update(self, Persona):
+		self.conn.reconnect()
 		self.sql = """update table {0}.persona set cedula={1}, nombre='{2}', apellido='{3}', fechanacimiento='{4}', sexo='{5}', tipoDocumento='{7}' where id={6}
 		""".format(self.conn.getSCHEMA(), Persona.getDocumento(), Persona.getNombre(), Persona.getApellido(), Persona.getFechaNacimiento(), Persona.getSexo(), Persona.getId(), Persona.gettipoDocumento())
 		try:
@@ -83,6 +85,7 @@ class PersonaDAO:
 		return self.msj
 
 	def Buscar(self, Persona, column):
+		self.conn.reconnect()
 		self.sql = """select * from {0}.persona where {1}={2}""".format(self.conn.getSCHEMA(), column, Persona)
 		try:
 			cn = self.conn.getConnection()
@@ -99,6 +102,7 @@ class PersonaDAO:
 
 
 	def VerTodos(self):
+		self.conn.reconnect()
 		self.sql = """select * from {0}.persona""".format(self.conn.getSCHEMA())
 		result = []
 		try:

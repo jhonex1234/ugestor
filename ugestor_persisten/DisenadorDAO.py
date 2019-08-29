@@ -16,6 +16,7 @@ class DisenadorDAO:
         self.sql = ""
 
     def Create(self, Disenador):
+        self.conn.reconnect()
         self.sql = """insert into {0}.Disenador ( idDisenador,paisOrigen, pasaporte) values ({1}, '{2}','{3}')""".format(
             self.conn.getSCHEMA(), Disenador.getId(), Disenador.getpasaporte(), Disenador.getpaisOrigen())
         try:
@@ -34,6 +35,7 @@ class DisenadorDAO:
 
 
 def Delete(self, Mo):
+    self.conn.reconnect()
     self.sql = """delete from {0}.Disenador where idDisenador={1}""".format(
         self.conn.getSCHEMA(), Disenador.getId())
     try:
@@ -52,6 +54,7 @@ def Delete(self, Mo):
 
 
 def Update(self, Disenador):
+    self.conn.reconnect()
     self.sql = """update table {0}.Disenador set idDisenador{1},pasaporteDisenador={1},paisOrigenDisenad={3}
     """.format(self.conn.getSCHEMA(),Disenador.getId(), Disenador.getpasaporte(), Disenador.getpaisOrigen())
     try:
@@ -69,6 +72,7 @@ def Update(self, Disenador):
     return self.msj
 
     def Buscar(self, Disenador, column):
+        self.conn.reconnect()
         self.sql = """select * from {0}.Disenador where {1}={2}""".format(
             self.conn.getSCHEMA(), column, Disenador)
         try:

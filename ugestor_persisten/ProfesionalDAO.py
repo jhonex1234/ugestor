@@ -16,6 +16,7 @@ class ProfesionalDAO:
         self.sql = ""
 
     def Create(self, Profesional):
+        self.conn.reconnect()
         self.sql = """insert into {0}.Profesional (idProfesional, EgresadoUniversidadProfesional, estudiosProfesional) values ({1}, '{2}','{3}')""".format(
             self.conn.getSCHEMA(), Profesional.getId(), Profesional.getEgresadoUniversidad(), Profesional.getestudios())
         try:
@@ -34,6 +35,7 @@ class ProfesionalDAO:
 
 
 def Delete(self, Mo):
+    self.conn.reconnect()
     self.sql = """delete from {0}.Profesional where idProfesional={1}""".format(
         self.conn.getSCHEMA(), Profesional.getId())
     try:
@@ -52,6 +54,7 @@ def Delete(self, Mo):
 
 
 def Update(self, Profesional):
+    self.conn.reconnect()
     self.sql = """update table {0}.Profesional set idProfesional{1},pasaporteProfesional={1},paisOrigenDisenad={3}
     """.format(self.conn.getSCHEMA(),Profesional.getId(), Profesional.getEgresadoUniversidad(), Profesional.getestudios())
     try:
@@ -69,6 +72,7 @@ def Update(self, Profesional):
     return self.msj
 
     def Buscar(self, Profesional, column):
+        self.conn.reconnect()
         self.sql = """select * from {0}.Profesional where {1}={2}""".format(
             self.conn.getSCHEMA(), column, Profesional)
         try:
