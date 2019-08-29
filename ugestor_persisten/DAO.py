@@ -1,7 +1,3 @@
-#!/usr/bin/python2.7
-#
-# Small script to show Postgreself.sql and Pyscopg together
-#
 import psycopg2
 
 class DAO:
