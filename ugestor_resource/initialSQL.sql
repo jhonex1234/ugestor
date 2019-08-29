@@ -1,3 +1,6 @@
+CREATE DATABASE ugestor;
+CREATE SCHEMA ugestorapp;
+
 create table ugestorapp.persona (
 id int,
 cedula int,
