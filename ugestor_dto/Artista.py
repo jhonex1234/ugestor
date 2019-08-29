@@ -2,7 +2,7 @@ from Empleado import Empleado
 
 
 class Artista(Empleado):
-    def __init__(self, nombreArtistico, generoMusical, tipoArtista):
+    def __init__(self,id , nombreArtistico, generoMusical, tipoArtista):
         super().__init__(self,id, fechaIngreso, Cargo, Salario, id)
         self.__id = id
         self.__nombreArtistico = nombreArtistico

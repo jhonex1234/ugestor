@@ -20,8 +20,8 @@ class Disenador(Persona):
     def setpasaporte(self, pasaporte):
      	self.__pasaporte = pasaporte
 
-    def getpasaporte(pasaporte):
+    def getpaisOrigen(pasaporte):
        return self.pasaporte
 
-    def setpasaporte(self, pasaporte):
+    def setpaisOrigen(self, pasaporte):
         self.__pasaporte = pasaporte

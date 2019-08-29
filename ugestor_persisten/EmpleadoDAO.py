@@ -5,26 +5,26 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 pathRootFolder = script_dir.split(script_dir.split(os.sep)[-1])[0]
 sys.path.append("{0}/ugestor_dto".format(pathRootFolder))
 from DAO import DAO
-from Modelo import Modelo
+from Empleado import Empleado
 
 
-class ModeloDAO:
+class EmpleadoDAO:
     """docstring for ClassName"""
 
     def __init__(self):
         self.conn = DAO()
         self.sql = ""
 
-    def Create(self, Modelo):
-        self.sql = """insert into {0}.Modelo (idModelo,colorojosModelo,colorpieModelo,estaturaModelo ,cinturaModelo,bustoModelo,tallapiesModelo,pesoModelo,fechaHistoricoModelo) values ({6},{1}, '{2}','{3}','{4}','{5}','{7}','{8}','{9}')""".format(
-            self.conn.getSCHEMA(), Modelo.getcolorOjos(), Modelo.getcolorPiel(), Modelo.getApellido(), Modelo.getestatura(), Modelo.getmedidaBusto(), Modelo.getId(), Modelo.getmedidaCintura(), Modelo.getPeso())
+    def Create(self, Empleado):
+        self.sql = """insert into {0}.Empleado (idEmpleado,fechaIngresoEmpleado, cargoEmpleado, salarioEmpleado) values ({1},{2}, '{3}','{4}')""".format(
+            self.conn.getSCHEMA(),Empleado.getId(),Empleado.getnombrefechaIngreso(),Empleado.getcargo(),Empleado.getsalario())
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()
             cur.execute(self.sql, )
             cur.close()
             cn.commit()
-            self.msj = "Modelo Creado Exitosamente"
+            self.msj = "Empleado Creado Exitosamente"
         except (Exception, psycopg2.DatabaseError) as error:
             self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
         finally:
@@ -34,15 +34,15 @@ class ModeloDAO:
 
 
 def Delete(self, Mo):
-    self.sql = """delete from {0}.Modelo where idModelo={1}""".format(
-        self.conn.getSCHEMA(), Modelo.getId())
+    self.sql = """delete from {0}.Empleado where idEmpleado={1}""".format(
+        self.conn.getSCHEMA(), Empleado.getId())
     try:
         cn = self.conn.getConnection()
         cur = cn.cursor()
         cur.execute(self.sql, )
         cur.close()
         cn.commit()
-        self.msj = "Modelo elimanado Exitosamente"
+        self.msj = "Empleado elimanado Exitosamente"
     except (Exception, psycopg2.DatabaseError) as error:
         self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
     finally:
@@ -51,9 +51,9 @@ def Delete(self, Mo):
     return self.msj
 
 
-def Update(self, Modelo):
-    self.sql = """update table {0}.Modelo set idModelo={1},colorojosModelo={2},colorpielModelo={3},estaturaModelo={4} ,cinturaModelo={5},bustoModelo={6},tallapiesModelo={8},pesoModelo={9},fechaHistoricoModelo={1}
-    """.format(self.conn.getSCHEMA(), Modelo.getId(), Modelo.getNombre(), Modelo.getcolorOjos(), Modelo.getcolorPiel(), Modelo.getestatura(), Modelo.getmedidaBusto(), Modelo.getmedidaBusto(), Modelo.getmedidaCintura(), Modelo.getPeso())
+def Update(self, Empleado):
+    self.sql = """update table {0}.Empleado set idEmpleado={1},fechaIngresoEmpleado={2}, cargoEmpleado={3}, salarioEmpleado={4}
+    """.format(self.conn.getSCHEMA(), Empleado.getId(),Empleado.getnombrefechaIngreso(),Empleado.getcargo(),Empleado.getsalario())
     try:
         cn = self.conn.getConnection()
         cur = cn.cursor()
@@ -68,9 +68,9 @@ def Update(self, Modelo):
             cn.close()
     return self.msj
 
-    def Buscar(self, Modelo, column):
-        self.sql = """select * from {0}.Modelo where {1}={2}""".format(
-            self.conn.getSCHEMA(), column, Modelo)
+    def Buscar(self, Empleado, column):
+        self.sql = """select * from {0}.Empleado where {1}={2}""".format(
+            self.conn.getSCHEMA(), column, Empleado)
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()

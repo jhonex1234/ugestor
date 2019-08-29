@@ -36,3 +36,15 @@ create table ugestorapp (
     pesoModelo int,
 	  fechaHistoricoModelo Date,
 	  idPersona);
+
+		create table ugestorapp.Artista(
+      idArtista int
+     nombreArtistico varchar(255),
+     generoMusical varchar(255),
+     tipoArtista varchar(255)
+		)
+		create table ugestorapp.Disenador(
+			idDisenador int
+		 pasaporteDisenador varchar(255),
+		 paisOrigenDisenador varchar(255)
+		)
