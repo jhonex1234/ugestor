@@ -18,7 +18,7 @@ class ArtistaDAO:
     def Create(self, Artista):
         self.sql = """insert into {0}.Artista (idArtista , nombreArtistico, generoMusical, tipoArtista,  idperdsona) values ({1},{2}, '{3}','{4}')""".format(
         self.conn.reconnect()
-            self.conn.getSCHEMA(), getnombreArtistico(),getnombreArtistico(),getgeneroMusical(),gettipoArtista())
+            self.conn.getSCHEMA(), Artista.getnombreArtistico(),Artista.getnombreArtistico(),Artista.getgeneroMusical(),Artista.gettipoArtista())
         try:
             cn = self.conn.getConnection()
             cur = cn.cursor()

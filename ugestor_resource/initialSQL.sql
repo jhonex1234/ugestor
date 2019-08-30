@@ -20,18 +20,18 @@ correoElectronico varchar(255),
 relacionesOtrasAgencias varchar(255),
 CodAgencia varchar(255));
 
-create table ugestorapp (
-id int,
-nombre varchar(255),
-fechainicio Date,
-fechafin Date,
-iddisenador int);
-
+--create table ugestorapp.disenador (--
+--id int,
+--nombre varchar(255),
+--fechainicio Date,
+--fechafin Date,
+--iddisenador int);
+--ALTER USER postgres WITH ENCRYPTED PASSWORD 'xxxxxxx';
 create table ugestorapp.modelo (
 idModelo int,
 colorojosModelo varchar(255),
 colorpielModelo varchar(255),
-estaturaModelo int
+estaturaModelo int,
 cinturaModelo int,
 bustoModelo int,
 tallapiesModelo int,
