@@ -16,6 +16,12 @@ class ModeloDAO:
         self.sql = ""
 
     def Create(self, Modelo):
+    nameSecuen = ""
+    if(self.conn.validateSequence(Persona.__class__.__name__)):
+        self.conn.reconnect()
+        nameSecuen = self.conn.createSequence(Persona.__class__.__name__)
+    else:
+		nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
         self.sql = """insert into {0}.Modelo (idModelo,colorojosModelo,colorpieModelo,estaturaModelo ,cinturaModelo,bustoModelo,tallapiesModelo,pesoModelo,fechaHistoricoModelo) values ({6},{1}, '{2}','{3}','{4}','{5}','{7}','{8}','{9}')""".format(
             self.conn.getSCHEMA(), Modelo.getcolorOjos(), Modelo.getcolorPiel(), Modelo.getApellido(), Modelo.getestatura(), Modelo.getmedidaBusto(), Modelo.getId(), Modelo.getmedidaCintura(), Modelo.getPeso())
             self.conn.reconnect()

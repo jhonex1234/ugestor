@@ -16,6 +16,12 @@ class ArtistaDAO:
         self.sql = ""
 
     def Create(self, Artista):
+        nameSecuen = ""
+        if(self.conn.validateSequence(Persona.__class__.__name__)):
+            self.conn.reconnect()
+        nameSecuen = self.conn.createSequence(Persona.__class__.__name__)
+        else:
+    		nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
         self.sql = """insert into {0}.Artista (idArtista , nombreArtistico, generoMusical, tipoArtista,  idperdsona) values ({1},{2}, '{3}','{4}')""".format(
         self.conn.reconnect()
             self.conn.getSCHEMA(), Artista.getnombreArtistico(),Artista.getnombreArtistico(),Artista.getgeneroMusical(),Artista.gettipoArtista())

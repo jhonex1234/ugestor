@@ -15,6 +15,12 @@ class EventoDAO:
 
 
 	def Create(self, Evento):
+		nameSecuen = ""
+	    if(self.conn.validateSequence(Persona.__class__.__name__)):
+	        self.conn.reconnect()
+	        nameSecuen = self.conn.createSequence(Persona.__class__.__name__)
+	    else:
+			nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
 		self.conn.reconnect()
 		self.sql = """insert into {0}.evento (id, nombre, fechainicio, fechafin, iddisenador) values ({1}, '{2}','{3}','{4}', {5})
 		""".format(self.conn.getSCHEMA(), Evento.getId(), Evento.getNombre(), Evento.getFechaInicio(), Evento.getFechaFin(), Evento.getIdDiseñador())
@@ -84,4 +90,3 @@ class EventoDAO:
 			if cn is not None:
 			    cn.close()
 		return result
-		

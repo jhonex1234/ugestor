@@ -16,10 +16,12 @@ class ProfesionalDAO:
         self.sql = ""
 
     def Create(self, Profesional):
+        nameSecuen = ""
         self.conn.reconnect()
         self.sql = """insert into {0}.Profesional (idProfesional, EgresadoUniversidadProfesional, estudiosProfesional) values ({1}, '{2}','{3}')""".format(
             self.conn.getSCHEMA(), Profesional.getId(), Profesional.getEgresadoUniversidad(), Profesional.getestudios())
         try:
+            nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
             cn = self.conn.getConnection()
             cur = cn.cursor()
             cur.execute(self.sql, )

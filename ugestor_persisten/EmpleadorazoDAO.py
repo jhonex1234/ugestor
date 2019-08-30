@@ -16,6 +16,12 @@ class EmpleadorazoDAO:
         self.sql = ""
 
     def Create(self, Empleadorazo):
+        nameSecuen = ""
+        if(self.conn.validateSequence(Persona.__class__.__name__)):
+            self.conn.reconnect()
+            nameSecuen = self.conn.createSequence(Persona.__class__.__name__)
+        else:
+    		nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
         self.sql = """insert into {0}.Empleadorazo (idEmpleadorazo) values ({1})""".format(
             self.conn.getSCHEMA(), Empleadorazo.getId())
             self.conn.reconnect()

@@ -54,6 +54,12 @@ def Delete(self, Mo):
 
 
 def Update(self, Empleado):
+    nameSecuen = ""
+    if(self.conn.validateSequence(Persona.__class__.__name__)):
+        self.conn.reconnect()
+        nameSecuen = self.conn.createSequence(Persona.__class__.__name__)
+    else:
+		nameSecuen = "seq_{0}".format(Persona.__class__.__name__)
     self.conn.reconnect()
     self.sql = """update table {0}.Empleado set idEmpleado={1},fechaIngresoEmpleado={2}, cargoEmpleado={3}, salarioEmpleado={4}
     """.format(self.conn.getSCHEMA(), Empleado.getId(),Empleado.getnombrefechaIngreso(),Empleado.getcargo(),Empleado.getsalario())
