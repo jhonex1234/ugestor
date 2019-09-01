@@ -1,7 +1,7 @@
 from Empleado import Empleado
 
 
-class profesionales(Empleado):
+class Profesional(Empleado):
       def __init__(self, id, EgresadoUniversidad, estudios):
           super().__init__(self, id, fechaIngreso, Cargo, Salario, id)
           self.__id = id

@@ -15,69 +15,68 @@ class AgenciaDAO:
 
 
 	def Create(self, Agencia):
-		self.sql = """insert into {0}.agencia (id, nombre, anocreacion, sedeproncipal, idPersona, correoElectronico, relacionesOtrasAgencias, CodAgencia) values ({1}, '{2}','{3}','{4}', {5}, '{6}', '{7}', '{8}')
+		self.sqlPerson = """insert into {0}.Agencia (idAgencia, nombreAgencia, anocreacionAgencia, sedeproncipalAgencia, idPersonaAgencia, correoElectronicoAgencia, relacionesOtrasAgencia, CodAgenciaAgencia) values ({1}, '{2}','{3}','{4}', {5}, '{6}', '{7}', '{8}')
 		""".format(self.conn.getSCHEMA(), Agencia.getId(), Agencia.getNombre(), Agencia.getAnocreacion(), Agencia.getsedeproncipal(), Agencia.getidPersona(), Agencia.getcorreoElectronico(), Agencia.getrelacionesOtrasAgencias(), Agencia.getCodAgencia())
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			cur.close()
 			cn.commit()
 			self.msj = "Finca Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 				cn.close()
-		return self.msj	
+		return self.msj
 
 
 	def Delete(self, Agencia):
 		self.sql = """delete from {0}.agencia where id={1}""".format(self.conn.getSCHEMA(), Agencia.getId())
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			cur.close()
 			cn.commit()
 			self.msj = "Finca Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 				cn.close()
-		return self.msj	
+		return self.msj
 
 
 	def Update(self, Agencia):
 		self.sql = """update {0}.agencia set id={1}, nombre='{2}', anocreacion='{3}', sedeproncipal='{4}', idPersona={5}, correoElectronico='{6}', relacionesOtrasAgencias='{7}', CodAgencia='{8}' where id={1}
 		""".format(self.conn.getSCHEMA(),  Agencia.getId(), Agencia.getNombre(), Agencia.getAnocreacion(), Agencia.getsedeproncipal(), Agencia.getidPersona(), Agencia.getcorreoElectronico(), Agencia.getrelacionesOtrasAgencias(), Agencia.getCodAgencia())
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			cur.close()
 			cn.commit()
 			self.msj = "Finca  Creada Exitosamente"
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 				cn.close()
-		return self.msj	
+		return self.msj
 
 	def Buscar(self, Agencia, column):
 		self.sql = """select * from{0}.agencia where {1}={2}""".format(self.conn.getSCHEMA(), column, Agencia)
-		try: 
+		try:
 			cn = self.conn.getConnection()
 			cur = cn.cursor()
 			cur.execute(self.sql, )
 			result = cur.fetchall()
 			cur.close()
-		except (Exception, psycopg2.DatabaseError) as error: 
+		except (Exception, psycopg2.DatabaseError) as error:
 			self.msj = "Lamentamos informar le que a ocurrido un error:  {0}".format(error)
-		finally: 
-			if cn is not None: 
+		finally:
+			if cn is not None:
 			    cn.close()
 		return result
-		

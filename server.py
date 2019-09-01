@@ -15,7 +15,7 @@ pass_url = '/'
 @app.route('/cPersona', methods=['GET', 'POST'])
 def indexcPersona():
 	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
-	
+
 	return dataManager.createPerson(persona)#redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
 
 

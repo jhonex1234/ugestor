@@ -10,23 +10,24 @@ CREATE SCHEMA ugestorapp
   AUTHORIZATION postgres;
 
 
-create table ugestorapp.persona (
-	id int,
-	cedula int,
-	nombre varchar(255),
-	apellido  varchar(255),
-	paisorigen varchar(255),
-	fechaNacimiento Date,
-	sexo varchar(25),
-	tipoDocumento varchar(15));
-	create table ugestorapp.agencia(
-	id int,
-	nombre varchar(255),
-	anocreacion Date,
-	sedeproncipal varchar(255),
+create table ugestorapp.Persona (
 	idPersona int,
-	correoElectronico varchar(255),
-	relacionesOtrasAgencias varchar(255),
+	cedulaPersona int,
+	nombrePersona varchar(255),
+	apellidoPersona  varchar(255),
+	paisorigenPersona varchar(255),
+	fechaNacimientoPersona Date,
+	sexoPersona varchar(25),
+	tipoDocumentoPersona varchar(15));
+
+	create table ugestorapp.Agencia(
+	idAgencia int,
+	nombreAgencia varchar(255),
+	anocreAgencia Date,
+	sedeproncipalAgencia varchar(255),
+	idPersonaAgencia int,
+	correoAgencia varchar(255),
+	relacionesOtrasAgenciasAgencia varchar(255),
 	CodAgencia varchar(255));
 
 --create table ugestorapp.disenador (--
@@ -36,7 +37,7 @@ create table ugestorapp.persona (
 --fechafin Date,
 --iddisenador int);
 --ALTER USER postgres WITH ENCRYPTED PASSWORD 'xxxxxxx';
-create table ugestorapp.modelo (
+create table ugestorapp.Modelo (
 idModelo int,
 colorojosModelo varchar(255),
 colorpielModelo varchar(255),

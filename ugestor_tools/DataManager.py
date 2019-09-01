@@ -47,6 +47,18 @@ class DataManager:
 	def v(self,Persona):
 		personadao.validate(Persona)
 
+	def createAgencia(self, Agencia):
+		return AgenciaDAO.Create(Agencia)
+
+	def deleteAgencia(self,Agencia):
+		return AgenciaDAO.Delete(Agencia)
+
+	def updateAgencia(self, Agencia):
+		return AgenciaDAO.Update(Agencia)
+
+	def buscarAgencia(self, Agencia, column):
+		return AgenciaDAO.Buscar(Agencia, column)
+
 	def createArtistas(self, Artistas):
 		return ArtistaDAO.Create(Artista)
 
