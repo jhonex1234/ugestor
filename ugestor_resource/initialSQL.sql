@@ -18,7 +18,8 @@ create table ugestorapp.Persona (
 	paisorigenPersona varchar(255),
 	fechaNacimientoPersona Date,
 	sexoPersona varchar(25),
-	tipoDocumentoPersona varchar(15));
+	tipoDocumentoPersona varchar(15),
+  primary key (idPersona));
 
 	create table ugestorapp.Agencia(
 	idAgencia int,
@@ -28,7 +29,8 @@ create table ugestorapp.Persona (
 	idPersonaAgencia int,
 	correoAgencia varchar(255),
 	relacionesOtrasAgenciasAgencia varchar(255),
-	CodAgencia varchar(255));
+	CodAgencia varchar(255)
+    primary key (idAgencia));
 
 --create table ugestorapp.disenador (--
 --id int,
@@ -47,35 +49,41 @@ bustoModelo int,
 tallapiesModelo int,
 pesoModelo int,
 fechaHistoricoModelo Date,
-idPersona int);
+idPersona int,
+primary key (idModelo)
+);
 
 create table ugestorapp.Artista(
 idArtista int,
 nombreArtistico varchar(255),
 generoMusical varchar(255),
 tipoArtista varchar(255),
-idPersona int
+idPersona int,
+primary key (idArtista)
 );
 create table ugestorapp.Disenador(
 idDisenador int,
 pasaporteDisenador varchar(255),
 paisOrigenDisenador varchar(255),
 idPersona int
-);
+primary key (idDisenador));
 create table ugestorapp.Empleadorazo(
-idEmpleadorazo int
+idEmpleadorazo int,
+primary key (idEmpleadorazo));
 
-);
+
 create table ugestorapp.Profesional(
 idProfesional int,
 EgresadoUniversidadProfesional varchar(255),
 estudiosProfesional varchar(255),
-idPersona int
+idPersona int,
+primary key (idProfesional)
 );
 create table ugestorapp.Empleado (
 idEmpleado int ,
 fechaIngresoEmpleado varchar(255),
 cargoEmpleado varchar(255),
 salarioEmpleado varchar(255),
-idPersona int
+idPersona int,
+primary key (idEmpleado)
 );
