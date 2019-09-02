@@ -10,7 +10,6 @@ class Modelo:
 		self.__estatura = estatura
 		self.__medidaCintura = medidaCintura
 		self.__medidaBusto = medidaBusto
-		self.__medidaCintura = medidaCintura
 		self.__tallaZapatos = tallaZapatos
 		self.__particularidades = particularidades
 		self.__peso = peso
@@ -33,7 +32,7 @@ class Modelo:
 		self.__colorPiel = colorPiel
 
 	def getestatura(self):
-		return self.__estaturmedidaBustoa
+		return self.__estatura
 
 	def setestatura(self, estatura):
 		self.__estatura = estatura
