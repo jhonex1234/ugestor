@@ -7,6 +7,7 @@ sys.path.append("{0}/ugestor_dto".format(script_dir))
 sys.path.append("{0}/ugestor_tools".format(script_dir))
 from DataManager import DataManager
 from Persona import Persona
+from PersonaDTO import PersonaDTO
 
 dataManager = DataManager();
 app = Flask(__name__, template_folder="ugestor_template")
