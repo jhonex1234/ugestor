@@ -6,7 +6,6 @@ from wtforms.fields.html5 import DateField
 from wtforms.fields import SelectField
 from wtforms import BooleanField
 from wtforms.validators import DataRequired
-from com_dao import ConnectionDB
 
 
 def validateNotNUll(form, field):

@@ -15,9 +15,20 @@ pass_url = '/'
 
 @app.route('/cPersona', methods=['GET', 'POST'])
 def indexcPersona():
-	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	formPersona = objPersona(request.form)
+	persona = Persona(formPersona.documento.data, formPersona.tipoDocumento.data, "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
+	dataManager.createPerson(persona)#redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+	return redirect("{0}{1}/v_cPersona".format(request.url_root, pass_url), code=302)
 
-	return dataManager.createPerson(persona)#redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
+#rederiza html
+@app.route('/v_cPersona', methods=['GET', 'POST'])
+def indexcPersonaForm():
+	formPersona = PersonaDTO(request.form)
+	link = '{0}{1}'.format(request.url_root, pass_url)
+    
+
+	return render_template('v_cPersona.html', link=link, form=formPersona)
+	
 
 
 @app.route('/dPersona', methods=['GET', 'POST'])
@@ -48,7 +59,7 @@ def indexalPersona():
 	return redirect("{0}{1}/formPersona".format(request.url_root, pass_url), code=302)
 
 
-
+"""
 @app.route('/formPersona', methods=['GET'])
 def info():
 	return "Ejemplo de retorno apartir de la peticion </br>{0}".format(dataManager.obtenerPersonas())#render_template("info.html")
@@ -60,6 +71,7 @@ def info_1():
 	persona = Persona(1, 1241224, "Juna", "cedula", "jhonson", "colombia", "29-05-2019", "masculino")
 	dataManager.v(persona.__class__.__name__)
 	return	""
+"""
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True, threaded=True)

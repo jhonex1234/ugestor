@@ -47,6 +47,9 @@ class DataManager:
 	def v(self,Persona):
 		personadao.validate(Persona)
 
+
+
+
 	def createAgencia(self, Agencia):
 		return AgenciaDAO.Create(Agencia)
 
